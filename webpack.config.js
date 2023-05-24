@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin")
 const { VueLoaderPlugin } = require("vue-loader")
+require("dotenv").config()
 
 const SIDEPANEL_URL = process.env.SIDEPANEL_URL || "http://localhost:3003"
 
