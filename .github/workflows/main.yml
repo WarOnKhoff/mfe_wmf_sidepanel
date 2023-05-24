@@ -1,0 +1,32 @@
+name: Github Pages Deploy
+
+on:
+  push:
+    branches:
+      - "master"
+env:
+  SIDEPANEL_URL: https://waronkhoff.github.io/mfe_wmf_sidepanel
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install and build
+        run: npm install && npm run build
+        env:
+          SIDEPANEL_URL: ${{ env.SIDEPANEL_URL }}
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist # The folder the action should deploy.
+
